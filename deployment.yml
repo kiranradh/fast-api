@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: fast-api-container
-          image: kiranradh/fastapi
+          image: kiranradh/fastapi1
           ports: 
             - containerPort: 80
           
