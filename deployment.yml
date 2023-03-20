@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fast-api-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: fast-api
+  template:
+    metadata:
+      name: fast-api-pod
+      labels:
+        app: fast-api
+    spec:
+      containers:
+        - name: fast-api-container
+          image: kiranradh/fastapi
+          ports: 
+            - containerPort: 80
+          
+# service file for Deployment       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fast-api
+  name: fast-api-service
+spec:
+  ports:
+  - name: http
+    port: 80
+    nodePort: 30000
+    protocol: TCP
+    targetPort: 80
+  type: NodePort
+  selector:
+    app: fast-api
